@@ -178,8 +178,8 @@ RULES — fail on any one of these:
 7. Must earn engagement on its own merits — genuinely helpful, insightful, or funny without brand affiliation
 
 For each comment:
-- If it passes all rules: return it unchanged
-- If it fails any rule: rewrite it to fix the violation while preserving the hook and community tone
+- If it passes all rules: return it EXACTLY as-is, including the original rationale text — do NOT replace the rationale with "Passes all rules" or any other meta-commentary
+- If it fails any rule: rewrite the text to fix the violation while preserving the hook and community tone, and update the rationale to explain why the revised approach works for this community
 
 Return ONLY valid JSON — no markdown, no explanation:
 {

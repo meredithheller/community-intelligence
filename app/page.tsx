@@ -22,7 +22,7 @@ export default function Home() {
         <UrlForm />
 
         <p className="mt-8 text-center text-xs text-gray-400">
-          Works with Reddit, TikTok, LinkedIn, and Twitter/X
+          Reddit threads supported — LinkedIn, TikTok & YouTube coming soon
         </p>
       </div>
     </main>

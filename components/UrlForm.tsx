@@ -23,6 +23,10 @@ export default function UrlForm() {
     }
   }
 
+  function isRedditThreadUrl(value: string): boolean {
+    return /reddit\.com\/r\/[^/]+\/comments\//.test(value);
+  }
+
   function hasFreeUsed(): boolean {
     return document.cookie.split(";").some((c) =>
       c.trim().startsWith("cv_free_used=")
@@ -37,8 +41,14 @@ export default function UrlForm() {
       setError("Both URLs are required.");
       return;
     }
-    if (!isValidUrl(brandUrl) || !isValidUrl(threadUrl)) {
-      setError("Please enter valid URLs for both fields.");
+    if (!isValidUrl(brandUrl)) {
+      setError("Please enter a valid brand URL (e.g. https://yourcompany.com).");
+      return;
+    }
+    if (!isValidUrl(threadUrl) || !isRedditThreadUrl(threadUrl)) {
+      setError(
+        "Please paste a Reddit thread URL — e.g. reddit.com/r/saas/comments/... Support for LinkedIn, TikTok, and YouTube is coming soon."
+      );
       return;
     }
 
@@ -91,7 +101,7 @@ export default function UrlForm() {
             required
           />
           <p className="text-xs text-gray-500">
-            Works with Reddit, TikTok, LinkedIn, and Twitter/X
+            Reddit threads only — LinkedIn, TikTok & YouTube coming soon
           </p>
         </div>
 
