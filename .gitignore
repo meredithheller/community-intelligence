@@ -1,0 +1,21 @@
+CLAUDE.md
+mcps-and-apis.md
+
+# environment variables (API keys — never commit)
+.env
+.env.local
+.env*.local
+
+node_modules/*
+.next/
+
+# research, planning, and scratch files
+research/*
+plans/*
+scratch/*
+
+# claude project files
+.claude/
+
+# clerk configuration (can include secrets)
+/.clerk/
