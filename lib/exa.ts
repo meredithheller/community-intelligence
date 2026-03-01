@@ -2,14 +2,27 @@ import Exa from "exa-js";
 
 const exa = new Exa(process.env.EXA_API_KEY!);
 
-// Reddit blocks Exa's crawler. Use Reddit's own JSON API instead.
+// Try Reddit's JSON API first; fall back to Exa if the server IP is blocked (403/429)
 async function fetchRedditThread(url: string): Promise<string> {
-  const jsonUrl = url.replace(/\/?$/, ".json");
+  const jsonUrl = url.replace(/\/?(\?.*)?$/, ".json");
   const res = await fetch(jsonUrl, {
-    headers: { "User-Agent": "community-voice-tool/1.0" },
+    headers: {
+      "User-Agent": "community-intelligence:v1.0 (growth research tool)",
+      "Accept": "application/json",
+    },
   });
   if (!res.ok) {
-    throw new Error(`Reddit API error: ${res.status}`);
+    // Vercel IPs are often blocked by Reddit — fall back to Exa livecrawl
+    const results = await exa.getContents([url], {
+      text: true,
+      livecrawl: "always",
+      filterEmptyResults: false,
+    });
+    const result = results.results[0];
+    if (!result?.text) {
+      throw new Error(`Could not retrieve Reddit thread content (status ${res.status})`);
+    }
+    return result.text;
   }
 
   const data = await res.json() as RedditApiResponse[];
