@@ -46,7 +46,13 @@ export function communityIntelligencePrompt(
   threadContent: string,
   platform: Platform
 ): string {
+  const platformContext = platform === "hackernews"
+    ? `This is a Hacker News thread. The HN community is predominantly software engineers, founders, and technical people. They are highly skeptical of marketing language, hype, and anything that sounds like a press release. They value technical depth, intellectual honesty, concrete evidence, and contrarian takes backed by reasoning. Emoji usage is essentially zero. Cynicism is high. Lengthy, substantive comments often outperform short ones. Common phrases: "interesting", "have you considered", "this is just X with extra steps", "what's the actual moat here", "citation needed". What gets flagged: self-promotion, vague claims, corporate speak.`
+    : `This is a ${platform} thread.`;
+
   return `You are a community intelligence analyst. Analyze this ${platform} thread and produce a detailed community intelligence report.
+
+${platformContext}
 
 Thread content:
 <content>
@@ -119,9 +125,9 @@ NON-NEGOTIABLE RULES — violating any of these makes the comment unusable:
 ═══════════════════════════════════════
 
 WHAT GOOD LOOKS LIKE:
-✓ A Notion employee in r/productivity sharing a specific, earned insight about how people manage context-switching — no Notion mention
-✓ A fintech employee in r/personalfinance pointing out a specific misconception about compound interest with real numbers — no product mention
-✓ A growth tools employee in r/SaaS adding a sharp, specific observation about why most early-stage marketing fails — demonstrates expertise, sells nothing
+✓ A Notion employee in a productivity thread sharing a specific, earned insight about how people manage context-switching — no Notion mention
+✓ A fintech employee pointing out a specific misconception about compound interest with real numbers — no product mention
+✓ A growth tools employee on HN adding a sharp, specific observation about why most early-stage marketing fails — demonstrates expertise, sells nothing
 ✓ A light, self-aware joke that lands as a human moment when the thread has a playful tone
 
 WHAT BAD LOOKS LIKE:

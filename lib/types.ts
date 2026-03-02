@@ -1,4 +1,4 @@
-export type Platform = "reddit" | "tiktok" | "linkedin" | "twitter" | "unknown";
+export type Platform = "hackernews" | "reddit" | "tiktok" | "linkedin" | "twitter" | "unknown";
 
 export interface BrandContext {
   productDescription: string;

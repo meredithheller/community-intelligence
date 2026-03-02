@@ -23,8 +23,8 @@ export default function UrlForm() {
     }
   }
 
-  function isRedditThreadUrl(value: string): boolean {
-    return /reddit\.com\/r\/[^/]+\/comments\//.test(value);
+  function isHnThreadUrl(value: string): boolean {
+    return /news\.ycombinator\.com\/item\?id=\d+/.test(value);
   }
 
   function hasFreeUsed(): boolean {
@@ -45,9 +45,9 @@ export default function UrlForm() {
       setError("Please enter a valid brand URL (e.g. https://yourcompany.com).");
       return;
     }
-    if (!isValidUrl(threadUrl) || !isRedditThreadUrl(threadUrl)) {
+    if (!isValidUrl(threadUrl) || !isHnThreadUrl(threadUrl)) {
       setError(
-        "Please paste a Reddit thread URL — e.g. reddit.com/r/saas/comments/... Support for LinkedIn, TikTok, and YouTube is coming soon."
+        "Please paste a Hacker News thread URL — e.g. news.ycombinator.com/item?id=..."
       );
       return;
     }
@@ -94,14 +94,14 @@ export default function UrlForm() {
           <input
             id="threadUrl"
             type="url"
-            placeholder="https://reddit.com/r/saas/comments/..."
+            placeholder="https://news.ycombinator.com/item?id=..."
             value={threadUrl}
             onChange={(e) => setThreadUrl(e.target.value)}
             className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm shadow-sm placeholder-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             required
           />
           <p className="text-xs text-gray-500">
-            Reddit threads only — LinkedIn, TikTok & YouTube coming soon
+            Hacker News threads only
           </p>
         </div>
 

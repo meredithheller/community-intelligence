@@ -26,7 +26,7 @@ const STAGE_META: Record<
 > = {
   analyze: {
     label: "Fetching content",
-    sub: "Crawling your brand and the Reddit thread",
+    sub: "Crawling your brand and the Hacker News thread",
   },
   intelligence: {
     label: "Reading the community",
@@ -178,9 +178,9 @@ function ResultsContent() {
 
     async function run() {
       try {
-        if (!/reddit\.com\/r\/[^/]+\/comments\//.test(threadUrl)) {
+        if (!/news\.ycombinator\.com\/item\?id=\d+/.test(threadUrl)) {
           throw new Error(
-            "Only Reddit threads are supported right now. Please go back and paste a reddit.com/r/.../comments/... URL. LinkedIn, TikTok, and YouTube support is coming soon."
+            "Only Hacker News threads are supported right now. Please go back and paste a news.ycombinator.com/item?id=... URL."
           );
         }
 
