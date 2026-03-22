@@ -57,4 +57,4 @@ You can copy individual responses or share the full set with a teammate via the 
 
 ## First Use
 
-Your first analysis is free with no account required. After that, you'll be asked to sign in with Google to continue using AirOps products and set up a habitual workflow.
+Your first analysis is free with no account required. After that, you'll be asked to sign in with Google to set up a habitual workflow.
